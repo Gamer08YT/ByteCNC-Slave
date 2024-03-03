@@ -30,7 +30,16 @@ graph TD;
     Slave4 --> Controls(Control Switches)
 ```
 
+### Software:
+The ID of a controller is unique and is stored on an EProm, together with the settings for the various operating modes. This enables quick and flexible adaptation to different requirements and situations.
+
+The workers are not equipped with their own logic, but only follow predefined instructions that are similar to a GCode (Slave XXXXX -> Goto XXXXX). These instructions are repeated until a "break" command is sent or an end button is reached, for example.
+
 ### Hardware:
 
-- ESP32
-- Digital I/O Expander (CH423S)
+[//]: # (https://www.instructables.com/State-machine-and-multitasking-on-arduino-with-SPI/)
+
+- ESP32 (ESP32-WROVER-E)
+- Digital I/O Expander (MCP23S17/SPI)
+- Analog DAC (MCP4921/SPI)
+- Analog ADC (MCP3004/SPI)
