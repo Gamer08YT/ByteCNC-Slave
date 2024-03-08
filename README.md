@@ -28,7 +28,7 @@ graph TD;
     Switch --> Slave1(Slave 1)
     Switch --> Slave2(Slave 2)
     Switch --> Slave3(Slave 3)
-    Switch --> Slave...(Slave ...)
+    Switch --> Slave4(Slave ...)
     Slave1 --> StepperX(Stepper X-Axis)
     Slave1 --> EncoderX(Encoder X-Axis)
     Slave1 --> EndstoppX(Endstopp X-Axis)
