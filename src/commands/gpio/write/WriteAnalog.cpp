@@ -4,6 +4,7 @@
 
 #include "WriteAnalog.h"
 #include "Arduino.h"
+#include "handler/SlaveHandler.h"
 
 namespace commands {
     /**
@@ -13,12 +14,17 @@ namespace commands {
     char * WriteAnalog::execute(std::vector<char *> argsIO) {
         int valueIO = reinterpret_cast<int>(argsIO[1]);
 
-        // Write State to Pin if not over max Value.
-        if (valueIO <= 255) {
-            analogWrite(*argsIO[0], valueIO);
+        // Don't do anything on Emergency.
+        if(!handler::SlaveHandler::isEmergency()) {
+            // Write State to Pin if not over max Value.
+            if (valueIO <= 255) {
+                analogWrite(*argsIO[0], valueIO);
+            }
+
+            return nullptr;
         }
 
-        return nullptr;
+        return "EMERGENCY";
     }
 
     const char *WriteAnalog::description() {

@@ -10,6 +10,7 @@
 #include "commands/gpio/mode/PinMode.h"
 #include "commands/emergency/EmergencyStop.h"
 #include "commands/emergency/Unlock.h"
+#include "commands/emergency/EmergencyConfig.h"
 #include <sstream>
 #include <iterator>
 #include <vector>
@@ -64,7 +65,7 @@ namespace handler {
         // Add Emergency Features.
         addCommand("STOP", new commands::EmergencyStop);
         addCommand("UNLOCK", new commands::Unlock);
-        addCommand("CONFIG")
+        addCommand("CONFIG", new  commands::EmergencyConfig);
 
         // Add Arduino Vanilla Features.
         addCommand("MODE", new commands::PinMode);

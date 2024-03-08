@@ -4,6 +4,7 @@
 
 #include "WriteDigital.h"
 #include "Arduino.h"
+#include "handler/SlaveHandler.h"
 
 namespace commands {
     /**
@@ -17,10 +18,15 @@ namespace commands {
     char * WriteDigital::execute(std::vector<char *> argsIO) {
         const auto valueIO = (argsIO[1] == "true" || argsIO[1] == "1" ? HIGH : LOW);
 
-        // Write State to Pin.
-        digitalWrite(*argsIO[0], valueIO);
+        // Don't do anything on Emergency.
+        if(!handler::SlaveHandler::isEmergency()) {
+            // Write State to Pin.
+            digitalWrite(*argsIO[0], valueIO);
 
-        return nullptr;
+            return nullptr;
+        }
+
+        return "EMERGENCY";
     }
 
     const char *WriteDigital::description() {
