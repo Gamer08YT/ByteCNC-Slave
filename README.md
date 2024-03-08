@@ -41,9 +41,9 @@ graph TD;
 ```
 
 ### Software:
-The ID of a controller is unique and is stored on an EProm, together with the settings for the various operating modes. This enables quick and flexible adaptation to different requirements and situations.
+The ID (eq. MAC) of a controller is unique and is stored on an EEProm, together with the settings for the various operating modes. This enables quick and flexible adaptation to different requirements and situations.
 
-The workers are not equipped with their own logic, but only follow predefined instructions that are similar to a GCode (Slave XXXXX -> Goto XXXXX). These instructions are repeated until a "break" command is sent or an end button is reached, for example.
+[//]: # (The workers are not equipped with their own logic, but only follow predefined instructions that are similar to a GCode &#40;Slave XXXXX -> Goto XXXXX&#41;. These instructions are repeated until a "break" command is sent or an end button is reached, for example.)
 
 ### Hardware:
 
