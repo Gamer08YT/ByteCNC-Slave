@@ -21,7 +21,7 @@ namespace commands {
      */
     class ReadDigital : public Command{
         public:
-            bool execute(std::vector<char *> argsIO) override;
+            char * execute(std::vector<char *> argsIO) override;
 
         private:
             const char *description() override;

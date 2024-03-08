@@ -14,13 +14,13 @@ namespace commands {
      * @param argsIO A vector of character pointers representing the arguments.
      * @return A boolean value indicating the success or failure of the execution.
      */
-    bool WriteDigital::execute(std::vector<char *> argsIO) {
+    char * WriteDigital::execute(std::vector<char *> argsIO) {
         const auto valueIO = (argsIO[1] == "true" || argsIO[1] == "1" ? HIGH : LOW);
 
         // Write State to Pin.
         digitalWrite(*argsIO[0], valueIO);
 
-        return true;
+        return nullptr;
     }
 
     const char *WriteDigital::description() {

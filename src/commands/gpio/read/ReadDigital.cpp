@@ -2,6 +2,7 @@
 // Created by Jan Heil on 08.03.2024.
 //
 
+#include <Arduino.h>
 #include "ReadDigital.h"
 
 namespace commands {
@@ -15,9 +16,8 @@ namespace commands {
      * @param argsIO A vector of char pointers representing the arguments for the command.
      * @return A boolean value indicating the success or failure of the execution.
      */
-    bool ReadDigital::execute(std::vector<char *> argsIO) {
-        // @todo: Return Digital Value.
-        return Command::execute(argsIO);
+    char * ReadDigital::execute(std::vector<char *> argsIO) {
+        return reinterpret_cast<char *>(analogRead(*argsIO[0]));
     }
 
     const char *ReadDigital::description() {

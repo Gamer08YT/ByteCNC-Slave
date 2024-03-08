@@ -2,6 +2,7 @@
 // Created by Jan Heil on 08.03.2024.
 //
 
+#include <Arduino.h>
 #include "ReadAnalog.h"
 
 namespace commands {
@@ -14,11 +15,8 @@ namespace commands {
      * @param argsIO A vector of character pointers representing the command arguments.
      * @return Returns false.
      */
-    bool ReadAnalog::execute(std::vector<char *> argsIO) {
-
-        // @todo: Return Analog Value.
-
-        return false;
+    char * ReadAnalog::execute(std::vector<char *> argsIO) {
+        return reinterpret_cast<char *>(analogRead(*argsIO[0]));
     }
 
     const char *ReadAnalog::description() {
