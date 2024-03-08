@@ -20,6 +20,8 @@ namespace handler {
 
             // Add Command to Map.
             static void addCommand(char *invokeIO, commands::Command *commandIO);
+
+        static void addDefaults();
     };
 
 } // handler

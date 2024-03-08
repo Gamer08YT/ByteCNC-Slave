@@ -31,6 +31,9 @@ void setup() {
 
   // Begin TCP Server.
   serverIO.begin();
+
+  // Add Default Commands.
+  handler::CommandHandler::addDefaults();
 }
 
 /**

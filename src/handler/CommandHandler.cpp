@@ -3,6 +3,10 @@
 //
 
 #include "CommandHandler.h"
+#include "commands/read/ReadAnalog.h"
+#include "commands/read/ReadDigital.h"
+#include "commands/write/WriteAnalog.h"
+#include "commands/write/WriteDigital.h"
 #include <sstream>
 #include <iterator>
 #include <vector>
@@ -45,6 +49,22 @@ namespace handler {
 
         // rest of your code
         return false;
+    }
+
+    /**
+     * @brief CommandHandler class responsible for managing commands.
+     *
+     * The CommandHandler class is used to add default commands in a map.
+     * It stores registered commands in an unordered map, with the command's invokeIO as the key and the commandIO pointer as the value.
+     */
+    void CommandHandler::addDefaults() {
+        // Add Default Read Handler.
+        addCommand("RA", new commands::ReadAnalog);
+        addCommand("RD", new commands::ReadDigital);
+
+        // Add Default Write Handler.
+        addCommand("WA", new commands::WriteAnalog);
+        addCommand("WD", new commands::WriteDigital);
     }
 
 } // handler
