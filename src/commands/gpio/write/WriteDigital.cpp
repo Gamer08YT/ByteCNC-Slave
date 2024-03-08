@@ -24,6 +24,6 @@ namespace commands {
     }
 
     const char *WriteDigital::description() {
-        return "Retrieve Settings";
+        return "WD <IO> <0-1>";
     }
 } // commands

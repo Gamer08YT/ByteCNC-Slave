@@ -22,6 +22,6 @@ namespace commands {
     }
 
     const char *WriteAnalog::description() {
-        return "Retrieve Settings"
+        return "WA <IO> <0-255>"
     }
 } // commands

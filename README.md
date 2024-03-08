@@ -10,6 +10,16 @@ A worker is connected to a main controller via an 8-wire network cable. The work
 
 This means that the workers work in a network that uses both digital and analog signals. Digital communication takes place via the TCP protocol, which enables reliable data transmission. Analog communication takes place via a special line that is reserved for emergencies only. If this line is activated, all worker movements stop immediately to prevent damage.
 
+###  TCP Commands:
+
+- UNLOCK **(Unlock Emergency Stop Lock)**
+- STOP **(Set Emergency Stop Lock)**
+- CONFIG <IO> <0-1, 0-255> **(Set Default Value for Emergency Stop)**
+- RA <IO> **(Read Analog Value)**
+- RD <IO> **(Read Digital Value)**
+- WD <IO> <0-1,false-true> **(Write Digital Value)**
+- WA <IO> <0-255> **(Write Analog Value)**
+
 ### Project Graph:
 
 ```mermaid

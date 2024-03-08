@@ -20,6 +20,6 @@ namespace commands {
     }
 
     const char *ReadAnalog::description() {
-        return "Quickstop";
+        return "RA <IO>";
     }
 }

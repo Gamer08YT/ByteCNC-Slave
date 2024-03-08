@@ -21,6 +21,6 @@ namespace commands {
     }
 
     const char *ReadDigital::description() {
-        return "Save Settings";
+        return "RD <IO>";
     }
 }

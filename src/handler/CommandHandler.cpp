@@ -3,10 +3,13 @@
 //
 
 #include "CommandHandler.h"
-#include "commands/read/ReadAnalog.h"
-#include "commands/read/ReadDigital.h"
-#include "commands/write/WriteAnalog.h"
-#include "commands/write/WriteDigital.h"
+#include "commands/gpio/read/ReadAnalog.h"
+#include "commands/gpio/read/ReadDigital.h"
+#include "commands/gpio/write/WriteAnalog.h"
+#include "commands/gpio/write/WriteDigital.h"
+#include "commands/gpio/mode/PinMode.h"
+#include "commands/emergency/EmergencyStop.h"
+#include "commands/emergency/Unlock.h"
 #include <sstream>
 #include <iterator>
 #include <vector>
@@ -58,6 +61,14 @@ namespace handler {
      * It stores registered commands in an unordered map, with the command's invokeIO as the key and the commandIO pointer as the value.
      */
     void CommandHandler::addDefaults() {
+        // Add Emergency Features.
+        addCommand("STOP", new commands::EmergencyStop);
+        addCommand("UNLOCK", new commands::Unlock);
+        addCommand("CONFIG")
+
+        // Add Arduino Vanilla Features.
+        addCommand("MODE", new commands::PinMode);
+
         // Add Default Read Handler.
         addCommand("RA", new commands::ReadAnalog);
         addCommand("RD", new commands::ReadDigital);
