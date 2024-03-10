@@ -4,12 +4,6 @@
 
 #include "PinMode.h"
 
-namespace commands {
-    char *PinMode::execute(std::vector<char *> argsIO) {
-        return Command::execute(argsIO);
+    String PinMode::execute(std::vector<String> argsIO) {
+        return "";
     }
-
-    const char *PinMode::description() {
-        return "MODE <IO> <ANALOG/DIGITAL>";
-    }
-} // commands

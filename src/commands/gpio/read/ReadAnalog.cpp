@@ -5,8 +5,6 @@
 #include <Arduino.h>
 #include "ReadAnalog.h"
 
-namespace commands {
-
     /**
      * @brief Executes the ReadAnalog command.
      *
@@ -15,11 +13,6 @@ namespace commands {
      * @param argsIO A vector of character pointers representing the command arguments.
      * @return Returns false.
      */
-    char * ReadAnalog::execute(std::vector<char *> argsIO) {
-        return reinterpret_cast<char *>(analogRead(*argsIO[0]));
+    String ReadAnalog::execute(std::vector<String> argsIO) {
+        return String(analogRead(argsIO[0].toInt()));
     }
-
-    const char *ReadAnalog::description() {
-        return "RA <IO>";
-    }
-}

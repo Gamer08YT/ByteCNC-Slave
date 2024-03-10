@@ -6,7 +6,6 @@
 #include "EmergencyConfig.h"
 #include "EEPROM.h" // EEPROM library to write values
 
-namespace commands {
     /**
      * @brief Executes the EmergencyConfig command.
      *
@@ -21,22 +20,17 @@ namespace commands {
 
      * @see EmergencyConfig
      */
-    char *EmergencyConfig::execute(std::vector<char *> argsIO) {
-        const char* pinIO = argsIO[0];
-        int valueIO = reinterpret_cast<int>(argsIO[1]);
+    String EmergencyConfig::execute(std::vector<String> argsIO) {
+        const String pinIO = argsIO[0];
+        int valueIO = argsIO[1].toInt();
 
         // Convert pinIO to int as EEPROM expects int value for address.
-        int eepromAddress = std::stoi(pinIO);
+        int eepromAddress = pinIO.toInt();
 
         // @todo Serialize...
 
         // Write value to EEPROM.
         EEPROM.write(eepromAddress, valueIO);
 
-        return nullptr;
+        return "";
     }
-
-    const char *EmergencyConfig::description() {
-        return "CONFIG <IO> <0-1, 0-255>";
-    }
-} // commands

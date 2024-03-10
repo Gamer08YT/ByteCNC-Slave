@@ -7,7 +7,6 @@
 
 namespace handler {
     class SlaveHandler {
-        static bool emergency;
 
     public:
         static bool isEmergency();

@@ -8,7 +8,6 @@
 #include <vector>
 #include "commands/Command.h"
 
-namespace commands {
 
     /**
      * @class WriteAnalog
@@ -18,12 +17,11 @@ namespace commands {
      */
     class WriteAnalog : public Command{
         public:
-            char * execute(std::vector<char *> argsIO) override;
+        String execute(std::vector<String> argsIO);
 
-        private:
-            const char *description() override;
+            const char *description() override {
+                return "WA <IO> <0-255>";
+            };
     };
-
-} // commands
 
 #endif //BYTECNC_SLAVE_WRITEANALOG_H

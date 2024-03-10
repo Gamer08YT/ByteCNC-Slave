@@ -5,8 +5,9 @@
 #include <vector>
 #include "Command.h"
 
-namespace commands {
-    /**
+#include <WString.h>
+
+/**
      * @brief Executes the command.
      *
      * This function is responsible for executing the command. It takes a vector of char pointers as input, which represents the arguments, and returns a pointer to a char array. The result
@@ -15,7 +16,6 @@ namespace commands {
      * @param argsIO A vector of char pointers representing the arguments.
      * @return A pointer to a char array representing the result of the execution. Returns nullptr if execution fails.
      */
-    char * Command::execute(std::vector<char *> argsIO) {
-        return nullptr;
+    String Command::execute(std::vector<String> argsIO) {
+        return "";
     }
-} // commands

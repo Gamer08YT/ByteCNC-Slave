@@ -5,7 +5,6 @@
 #include "EmergencyStop.h"
 #include "handler/SlaveHandler.h"
 
-namespace commands {
     /**
      * @brief Executes the emergency stop command.
      *
@@ -17,14 +16,9 @@ namespace commands {
      *
      * @see SlaveHandler::setEmergency()
      */
-    char *EmergencyStop::execute(std::vector<char *> argsIO) {
+    String EmergencyStop::execute(std::vector<String> argsIO) {
         // Set All IOs to emergency Values (Default Values).
         handler::SlaveHandler::setEmergency(true);
 
-        return nullptr;
+        return "OK";
     }
-
-    const char *EmergencyStop::description() {
-        return "STOP";
-    }
-} // commands

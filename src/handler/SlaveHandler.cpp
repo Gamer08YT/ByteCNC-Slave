@@ -6,6 +6,8 @@
 #include "PinHandler.h"
 
 namespace handler {
+    static bool emergency;
+
     /**
      * @brief Check if there is an emergency.
      *
@@ -14,36 +16,22 @@ namespace handler {
      * @return true if there is an emergency, false otherwise.
      */
     bool SlaveHandler::isEmergency() {
-        return SlaveHandler::emergency;
+        return emergency;
     }
 
     /**
-     * @brief Set the emergency flag value for the SlaveHandler.
+     * @brief Set the emergency state.
      *
-     * This function sets the value of the emergency flag in the SlaveHandler class.
+     * This method sets the value of the static member variable `emergency` in the `SlaveHandler` class. If the `valueIO` parameter is `true`, it also calls the `emergency()` method in the `handler::PinHandler` class to set all pins to emergency fallback state.
      *
-     * @param valueIO The new value for the emergency flag.
-     *
-     * @details
-     * The emergency flag is a static member variable of the SlaveHandler class.
-     * It indicates whether the system is in an emergency state or not.
-     *
-     * If the valueIO is true, the emergency flag will be set to true.
-     * In addition, the emergency state will be propagated to all pins.
-     *
-     * @note
-     * This function should be called whenever an emergency condition is detected or resolved.
-     *
-     * @see SlaveHandler::emergency
-     * @see handler::PinHandler::emergency()
-     * @see SlaveHandler::isEmergency()
+     * @param valueIO The value to be set for the emergency state. `true` to activate emergency state, `false` to deactivate emergency state.
      */
     void SlaveHandler::setEmergency(bool valueIO) {
-        SlaveHandler::emergency = valueIO;
+        emergency = valueIO;
 
         // Set all Pins to Emergency Fallback if true.
         if(valueIO) {
-            handler::PinHandler::emergency();
+            PinHandler::emergency();
         }
     }
 }

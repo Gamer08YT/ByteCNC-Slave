@@ -9,8 +9,6 @@
 #include <vector>
 #include "commands/Command.h"
 
-namespace commands {
-
     /**
      * @class ReadDigital
      *
@@ -21,11 +19,11 @@ namespace commands {
      */
     class ReadDigital : public Command{
         public:
-            char * execute(std::vector<char *> argsIO) override;
+            String execute(std::vector<String> argsIO);
 
-        private:
-            const char *description() override;
+            const char *description() override {
+                return "RD <IO>";
+            };
     };
-};
 
 #endif //BYTECNC_SLAVE_READDIGITAL_H

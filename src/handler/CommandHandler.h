@@ -5,23 +5,25 @@
 #ifndef BYTECNC_SLAVE_COMMANDHANDLER_H
 #define BYTECNC_SLAVE_COMMANDHANDLER_H
 
+#include <map>
 #include <unordered_map>
 #include <commands/Command.h>
 
 namespace handler {
 
     class CommandHandler {
-        // Store registered Commands in Map.
-        static std::unordered_map<char*, commands::Command*> commands;
-
         public:
             // Execute given Command.
-            static bool execute(char *dataIO);
+            static String execute(String dataIO);
+
+            static std::map<String, Command*> commands;
 
             // Add Command to Map.
-            static void addCommand(char *invokeIO, commands::Command *commandIO);
+            static void addCommand(String invokeIO, Command *commandIO);
 
-        static void addDefaults();
+            static void addDefaults();
+
+            static std::vector<String> split(String&valueIO, const char* delimiterIO);
     };
 
 } // handler

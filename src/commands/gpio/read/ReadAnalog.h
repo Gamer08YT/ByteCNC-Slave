@@ -8,7 +8,7 @@
 #include <vector>
 #include "commands/Command.h"
 
-namespace commands {
+
     /**
      * @class ReadAnalog
      * @brief The ReadAnalog class is a subclass of the Command class.
@@ -17,12 +17,12 @@ namespace commands {
      */
     class ReadAnalog : public Command {
         public:
-            char * execute(std::vector<char *> argsIO) override;
+        String execute(std::vector<String> argsIO);
 
-        private:
-            const char *description() override;
+            const char *description() override {
+                return "RA <IO>";
+            };
     };
-};
 
 
 #endif //BYTECNC_SLAVE_READANALOG_H

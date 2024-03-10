@@ -11,15 +11,12 @@
 namespace handler {
 
     class PinHandler {
-        // Store registered Pins in Map.
-        static std::unordered_map<uint8_t, storage::PinConfig*> pins;
+        public:
+            static const std::unordered_map<uint8_t, storage::PinConfig *> &getPins();
 
-    public:
-        static const std::unordered_map<uint8_t, storage::PinConfig *> &getPins();
+            static void addPin(uint8_t pinIO, storage::PinConfig* commandIO);
 
-        static void addPin(uint8_t pinIO, storage::PinConfig* commandIO);
-
-        static void emergency();
+            static void emergency();
     };
 
 } // handler

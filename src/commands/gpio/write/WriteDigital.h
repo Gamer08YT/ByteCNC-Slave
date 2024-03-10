@@ -8,7 +8,6 @@
 #include <vector>
 #include "commands/Command.h"
 
-namespace commands {
 
     /**
      * @class WriteDigital
@@ -18,12 +17,11 @@ namespace commands {
      */
     class WriteDigital : public Command{
         public:
-            char * execute(std::vector<char *> argsIO) override;
+        String execute(std::vector<String> argsIO);
 
-        private:
-            const char *description() override;
+            const char *description() override {
+                return "WD <IO> <0-1>";
+            };
     };
-
-} // commands
 
 #endif //BYTECNC_SLAVE_WRITEDIGITAL_H

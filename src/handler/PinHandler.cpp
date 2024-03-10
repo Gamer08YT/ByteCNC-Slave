@@ -6,6 +6,9 @@
 #include "PinHandler.h"
 
 namespace handler {
+    // Store registered Pins in Map.
+    static std::unordered_map<uint8_t, storage::PinConfig*> pins;
+
     /**
      * @brief PinHandler class for managing pins.
      *

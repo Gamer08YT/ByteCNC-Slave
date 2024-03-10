@@ -8,16 +8,14 @@
 #include <vector>
 #include "commands/Command.h"
 
-namespace commands {
-
     class EmergencyStop : public Command{
-    public:
-        char *execute(std::vector<char *> argsIO) override;
+        public:
+        String execute(std::vector<String> argsIO);
 
-    private:
-        const char *description() override;
+            const char *description() override {
+                return "STOP";
+            };
     };
 
-} // commands
 
 #endif //BYTECNC_SLAVE_EMERGENCYSTOP_H

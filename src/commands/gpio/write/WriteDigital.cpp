@@ -6,7 +6,6 @@
 #include "Arduino.h"
 #include "handler/SlaveHandler.h"
 
-namespace commands {
     /**
      * @brief Executes the write digital command.
      *
@@ -15,21 +14,16 @@ namespace commands {
      * @param argsIO A vector of character pointers representing the arguments.
      * @return A boolean value indicating the success or failure of the execution.
      */
-    char * WriteDigital::execute(std::vector<char *> argsIO) {
+    String WriteDigital::execute(std::vector<String> argsIO) {
         const auto valueIO = (argsIO[1] == "true" || argsIO[1] == "1" ? HIGH : LOW);
 
         // Don't do anything on Emergency.
         if(!handler::SlaveHandler::isEmergency()) {
             // Write State to Pin.
-            digitalWrite(*argsIO[0], valueIO);
+            digitalWrite(argsIO[0].toInt(), valueIO);
 
-            return nullptr;
+            return "";
         }
 
         return "EMERGENCY";
     }
-
-    const char *WriteDigital::description() {
-        return "WD <IO> <0-1>";
-    }
-} // commands

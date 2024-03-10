@@ -8,16 +8,15 @@
 #include <vector>
 #include "commands/Command.h"
 
-namespace commands {
-
     class PinMode : public Command {
-    public:
-        char *execute(std::vector<char *> argsIO) override;
+        public:
+            String execute(std::vector<String> argsIO);
 
-    private:
-        const char *description() override;
-    };
 
-} // commands
+            const char *description() override {
+                return "MODE <IO> <ANALOG/DIGITAL>";
+            };
+
+        }; // commands
 
 #endif //BYTECNC_SLAVE_PINMODE_H

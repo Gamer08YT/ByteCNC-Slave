@@ -8,16 +8,13 @@
 #include <vector>
 #include "commands/Command.h"
 
-namespace commands {
-
     class EmergencyConfig : public Command {
-    public:
-        char *execute(std::vector<char *> argsIO) override;
+        public:
+        String execute(std::vector<String> argsIO);
 
-    private:
-        const char *description() override;
+            const char *description() {
+                return "CONFIG <IO> <0-1, 0-255>";
+            };
     };
-
-} // commands
 
 #endif //BYTECNC_SLAVE_EMERGENCYCONFIG_H

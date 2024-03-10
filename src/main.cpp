@@ -1,15 +1,20 @@
 #include <Arduino.h>
-#include <Ethernet.h>
 #include <handler/CommandHandler.h>
+#include <handler/TelnetHandler.h>
+#include <ESP8266WiFi.h>
+#include <Secret.h>
 
 // Set Default MAC-Address should be ESP32 MAC.
 byte macIO[] = {0x00, 0x04, 0x03, 0x41, 0x8C, 0xEE};
 
-// Set Default Static Address.
-IPAddress ipIO(10, 0, 0, 10);
+// // Set Default Static Address.
+// IPAddress ipIO(10, 0, 0, 10);
 
-// Initialize the Ethernet TCP Server.
-EthernetServer serverIO(52003);
+// Default WiFi Fallback.
+/*const char* ssid = "ByteSlave";
+const char* password = "Hostinger2024";*/
+const char* ssid = Secret::ssid;
+const char* password = Secret::password;
 
 /**
  * @brief Initializes the Ethernet connection and starts the server.
@@ -26,14 +31,57 @@ EthernetServer serverIO(52003);
  * @return void
  */
 void setup() {
-  // Start the Ethernet connection and the server
-  Ethernet.begin(macIO, ipIO);
+    // Begin Serial Output.
+    Serial.begin(115200);
 
-  // Begin TCP Server.
-  serverIO.begin();
+    // Setting up WiFi AP.
+    Serial.print("Connecting to WiFi Network.");
 
-  // Add Default Commands.
-  handler::CommandHandler::addDefaults();
+    #if defined(ARDUINO_ARCH_ESP8266)
+        WiFi.forceSleepWake();
+        delay(200);
+    #endif
+
+    // Start WiFi AP.
+    WiFi.begin(ssid, password);
+
+    // Wait for connection to complete.
+    while (WiFi.status()  != WL_CONNECTED) {
+        Serial.print(".");
+        delay(100);
+    }
+
+    // Set Auto Reconnect and Persistent.
+    WiFi.setAutoReconnect(true);
+    WiFi.persistent(true);
+
+    // Print Debug Message.
+    Serial.print("Local IP address: ");
+    Serial.println(WiFi.localIP());
+
+    //  // Start the Ethernet connection.
+    //  Ethernet.begin(macIO, ipIO);
+
+    //  // Get Status of Ethernet Shield.
+    //  EthernetLinkStatus linkStatus = Ethernet.linkStatus();
+    //
+    //  // Open WiFi AP if Ethernet Status is not Connected.
+    //  if(linkStatus == Unknown || linkStatus == LinkOFF) {
+    //      // Ethernet not connected.
+    //      Serial.println("Ethernet not connected. Starting WiFi AP.");
+    //
+    //      // Start WiFi AP.
+    //      WiFi.softAP(ssid, password);
+    //  }
+
+    // Setup Telnet Listeners.
+    handler::TelnetHandler::setup();
+
+    // Begin TCP Server.
+    handler::TelnetHandler::telnetIO.begin(23);
+
+    // Add Default Commands.
+    handler::CommandHandler::addDefaults();
 }
 
 /**
@@ -44,21 +92,6 @@ void setup() {
  * @note This function assumes that an EthernetServer instance named 'server' has already been defined and initialized with a port number.
  */
 void loop() {
-  // Check if a client has connected
-  EthernetClient clientIO = serverIO.available();
-
-  // Check if Client is available.
-  if (clientIO) {
-    // Read the first line of the Client request.
-    String requestIO = clientIO.readStringUntil('\r');
-
-    // Flush Socket Stream.
-    clientIO.flush();
-
-    // Match the request if not empty.
-    if (requestIO) {
-        // Execute Command.
-        handler::CommandHandler::execute(const_cast<char *>(requestIO.c_str()));
-    }
-  }
+    // Loop Telnet Server Function.
+    handler::TelnetHandler::telnetIO.loop();
 }

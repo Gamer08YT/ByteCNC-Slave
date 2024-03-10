@@ -8,16 +8,15 @@
 #include <vector>
 #include "commands/Command.h"
 
-namespace commands {
 
     class Unlock : public Command {
-    public:
-        char *execute(std::vector<char *> argsIO) override;
+        public:
+        String execute(std::vector<String> argsIO);
 
-    private:
-        const char *description() override;
+            const char *description() override {
+                return "UNLOCK";
+            };
     };
 
-} // commands
 
 #endif //BYTECNC_SLAVE_UNLOCK_H
